@@ -1,0 +1,1 @@
+To solve this we need to have 3 methods, one checking the horizontal, one checking the vertical and another checking the diagonal nodes near it. I am trying to think of a more efficient solution but I don't know how to get a solution faster than O(n^2)

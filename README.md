@@ -12,5 +12,4 @@ This repository contains my annual attempts at solving Advent of Code puzzles. T
 - Experiment with different languages
 - Develop clean code practices
 
-While primarily educational, some solutions include optimized approaches and creative problem-solving techniques worth sharing.
 

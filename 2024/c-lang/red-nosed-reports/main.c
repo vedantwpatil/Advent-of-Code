@@ -12,6 +12,7 @@ bool is_valid_sequence(const char *line) {
     exit(EXIT_FAILURE);
   }
 
+  // Convert the characters into integers
   int count = 0;
   char *token = strtok((char *)line, " \n");
 

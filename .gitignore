@@ -1,2 +1,23 @@
-# Ignore all the input files 
+# Ignore all .txt files
 *.txt
+
+# C/C++ compiled files
+*.o
+*.obj
+*.exe
+*.out
+*.dll
+*.so
+*.a
+*.dSYM  # macOS debug symbols
+
+# Rust compiled files
+/target/  # Cargo build directory
+*.rlib
+*.d
+*.pdb
+
+# Build directories (common for both C and Rust)
+bin/
+build/
+dist/
