@@ -15,8 +15,7 @@
 *.dSYM  # macOS debug symbols
 
 # Rust compiled files
-rust/target
-/target/  # Cargo build directory
+**/target/
 *.rlib
 *.d
 *.pdb
