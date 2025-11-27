@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
@@ -15,23 +16,44 @@ fn main() -> std::io::Result<()> {
         // Need to add error handling in order to print
         let error_checked_line = line?;
         let words: Vec<&str> = error_checked_line.split_whitespace().collect();
-        left.push(words[0].parse().unwrap());
-        right.push(words[1].parse().unwrap());
+        let left_value: i32 = words[0].parse().unwrap();
+        let right_value: i32 = words[1].parse().unwrap();
+
+        left.push(left_value);
+        right.push(right_value);
     }
+    // Create frequency map of the RIGHT list
+    // We pass the rerference so we don't lose ownership of 'right'
+    let right_counts = frequency_counter(&right);
+
+    // Calculate the Similarity Score
+    let mut similarity_score: i32 = 0;
+    for num in &left {
+        // .get() returns Option<&count>, so we unwrap_or(&0) to get 0 if not found
+        let count = right_counts.get(num).unwrap_or(&0);
+        similarity_score += num * count;
+    }
+
+    println!("Similarity Score: {}", similarity_score);
 
     left.sort();
     right.sort();
 
-    let mut sum_distance = 0;
+    let total_distance: i32 = left
+        .iter()
+        .zip(right.iter())
+        .map(|(l, r)| (l - r).abs())
+        .sum();
 
-    for i in 0..left.len() {
-        let distance = (left[i] - right[i]).abs();
-        println!("Left: {}", left[i]);
-        println!("Right: {}", right[i]);
-        println!("Distance: {}", distance);
-        sum_distance += distance;
-    }
+    println!("Summed Distances: {}", total_distance);
 
-    println!("{}", sum_distance);
     Ok(())
+}
+
+fn frequency_counter(items: &[i32]) -> HashMap<i32, i32> {
+    let mut counts = HashMap::new();
+    for &item in items {
+        *counts.entry(item).or_insert(0) += 1;
+    }
+    counts
 }
